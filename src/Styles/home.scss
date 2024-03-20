@@ -48,6 +48,7 @@
                         height: 45px;
                         width: 80%;
                         border: none;
+                        outline: none;
 
                         &::placeholder {
                             padding: 20px;
@@ -126,6 +127,7 @@
                 text-align: center;
                 border: 1px solid #ccc;
                 border-radius: 10px;
+                font-size: 20px;
                 >.selected{
                     background-color: #407BFF;
                 }
