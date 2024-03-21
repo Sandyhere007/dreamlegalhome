@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 // import { server } from '..'
+import '../Styles/products.scss'
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import Select from 'react-select';
 import { categoryOptions } from '../Assets/JSON/Category';
 import { deploymentOptions } from '../Assets/JSON/Deployment';
 import { countryOptions } from '../Assets/JSON/Country';
-import { commonToAll, clientManagementSoftwareOptions, complianceAndRiskManagementOptions, contractManagementSoftwareOptions, digitalSignatureOptions, documentManagementAndAutomationOptions, EBillingAndInvoicingOptions, EDiscoveryOptions, intellectualPropertyManagementOptions, litigationManagementAndAnalyticsOptions, legalWorkflowAutomationOptions } from '../Assets/JSON/Features'
+import { commonToAll, clientManagementSoftwareOptions, complianceAndRiskManagementOptions, contractManagementSoftwareOptions, digitalSignatureOptions, documentManagementAndAutomationOptions, EBillingAndInvoicingOptions, EDiscoveryOptions, intellectualPropertyManagementOptions, litigationManagementAndAnalyticsOptions, legalWorkflowAutomation, budgetExpenseAndTimeTracking, legalWorkflowAutomationOptions } from '../Assets/JSON/Features'
 
+import { toolAdministration } from '../Assets/JSON/ToolAdministration';
 import { languageOptions } from '../Assets/JSON/Language';
 import { customerSegmentOptions } from '../Assets/JSON/CustomerSegment';
 import { industryOptions } from '../Assets/JSON/Industry';
@@ -117,7 +119,8 @@ const Products = () => {
     const [training, setTraining] = useState(Boolean)
     const [trainingData, setTrainingData] = useState([])
     const [storage, setStorage] = useState("")
-    const [memoryChange, setMemoryChange] = useState("")
+    const [storageChange, setStorageChange] = useState("")
+    const [fileSizeChange, setFileSizeChange] = useState("")
 
     const [fileSize, setFileSize] = useState("")
 
@@ -147,7 +150,7 @@ const Products = () => {
     // const [dataItem, setDataItem] = useState([]);
 
     // useEffect(async (e) => {
-    //    await axios.get(`${server}/api/all`, {
+    //    await axios.get(`https://dreamlegalproductbackend.onrender.com/api/all`, {
     //       withCredentials: true,
     //     }).then((res) => setDataItem(res.data))
 
@@ -157,7 +160,7 @@ const Products = () => {
         e.preventDefault();
 
         const { data } = await axios.post("https://dreamlegalproductbackend.onrender.com/api/products/new", {
-            name, overview, uniqueSellingProposition, category, deployment, accessibility, adoptionTime, country,  language, customerSegment, customerSegmentPercentage, industries, practiceAreas, clientTeamSize, internalCollaboration, externalCollaboration, analyticsAndReporting, toolAdministrationAndControlChange,  intakeAndLeadManagement,clientPortal, documentManagement, caseAlerts, budgetExpenseAndTimeTracking, clientBillingAndInvoicing, policyManagement, issueManagement, lawsComplianceAndRegulatoryTracking, contractCreationAndAuthoring, contractRepository,contractNegotiation,  lifecycleManagement, clauseLibrary, fieldsCreation, trackingAndValidity, documentManagementAndTemplates, documentCapturing, documentCreationAndTemplates, documentCapturing2,documentSearchAndNavigation,authentication, taskAllotment, budgetingExpenseAndTimeTracking, clientManagement,invoiceGenerationAndReview, dataIdentificationAndCollection, searchProcessingAndAnalysis, reviewAndProduction,legalHoldManagement,  ideationAndCreation,lifecycleManagement2, searchAndDiscovery, storageAndRepository, matterLifecycleTracking, courtAndCaseSearch,budgetExpenseAndTimeTracking2,litigationDocketingFeatures, workflowDesignAndConfiguration, assignmentAllotmentAndTracking, documentCreationAndManagement, lawsComplianceAndRegulatoryTracking2,minimumContractPeriod, freeTrial, freePlan, plan1Feature1,plan1Feature2, plan1Feature3, plan2Feature1, plan2Feature2,plan2Feature3, videoLink, knowHowDocument, linkedIn, instagram, twitter, youtube, otherLink, demo,demoData, demoLink, support, supportData, training, trainingData, storage,memoryChange, fileSize, requestForChange, postImplementationTraining, dataMigration, userTestimonialName1, userTestimonialDesignation1, userTestimonialCompany1, userTestimonialComment1, userTestimonialName2, userTestimonialDesignation2, userTestimonialCompany2, userTestimonialComment2
+            name, overview, uniqueSellingProposition, category, deployment, accessibility, adoptionTime, country, language, customerSegment, customerSegmentPercentage, industries, practiceAreas, clientTeamSize, internalCollaboration, externalCollaboration, analyticsAndReporting, toolAdministrationAndControlChange, intakeAndLeadManagement, clientPortal, documentManagement, caseAlerts, budgetExpenseAndTimeTracking, clientBillingAndInvoicing, policyManagement, issueManagement, lawsComplianceAndRegulatoryTracking, contractCreationAndAuthoring, contractRepository, contractNegotiation, lifecycleManagement, clauseLibrary, fieldsCreation, trackingAndValidity, documentManagementAndTemplates, documentCapturing, documentCreationAndTemplates, documentCapturing2, documentSearchAndNavigation, authentication, taskAllotment, budgetingExpenseAndTimeTracking, clientManagement, invoiceGenerationAndReview, dataIdentificationAndCollection, searchProcessingAndAnalysis, reviewAndProduction, legalHoldManagement, ideationAndCreation, lifecycleManagement2, searchAndDiscovery, storageAndRepository, matterLifecycleTracking, courtAndCaseSearch, budgetExpenseAndTimeTracking2, litigationDocketingFeatures, workflowDesignAndConfiguration, assignmentAllotmentAndTracking, documentCreationAndManagement, lawsComplianceAndRegulatoryTracking2, minimumContractPeriod, freeTrial, freePlan, plan1Feature1, plan1Feature2, plan1Feature3, plan2Feature1, plan2Feature2, plan2Feature3, videoLink, knowHowDocument, linkedIn, instagram, twitter, youtube, otherLink, demo, demoData, demoLink, support, supportData, training, trainingData, storage, storageChange, fileSize, fileSizeChange, requestForChange, postImplementationTraining, dataMigration, userTestimonialName1, userTestimonialDesignation1, userTestimonialCompany1, userTestimonialComment1, userTestimonialName2, userTestimonialDesignation2, userTestimonialCompany2, userTestimonialComment2
         },
 
             {
@@ -173,8 +176,8 @@ const Products = () => {
 
 
 
-   
-    
+
+
     const handleLanguageChange =
         (selectedOptions) => {
             setLanguage(selectedOptions)
@@ -187,7 +190,7 @@ const Products = () => {
     const handleDeploymentChange = (selectedOptions) => {
         setDeployment(selectedOptions)
     };
-   
+
 
     const handleCategoryChange = (selectedOptions) => {
         setCategory(selectedOptions);
@@ -469,14 +472,14 @@ const Products = () => {
                 {/* {
             dataItem && dataItem.map((item) => (
                 <div className="productInfo">
-                    Name Of Company : { item.name} <br />
-                    Category : { item.category}<br /> 
+                    Name Of Company : { item.name} 
+                    Category : { item.category} 
                     Deployment :  { item.deployment} 
-                    <br />
+                    
                     Mobile Accessibility : {item.accessibility}
-                    <br />
+                    
                     Focus Countries : {item.country}
-                    <br />
+                    
                     Average Adoption Time : {item.adoptionTime}
                 </div>
             ))
@@ -485,463 +488,566 @@ const Products = () => {
             <div className="addProducts">
                 <form action="" method='post' onSubmit={submitHandler}>
                     <div className="category">
-
                         <h1>Product Information</h1>
-                        Name of the Product &nbsp;
-                        <input type="text" placeholder='Enter product name' value={capitalizeFullName(name)} onChange={(e) => setName(e.target.value)}  autoCapitalize='' /><br /><br />
-                        Overview ( Up to 150 words ) <br />
-                        <textarea type="text" placeholder='Enter Overview' maxLength={1000} value={capitalizeFirstLetter(overview)} onChange={(e) => setOverview(e.target.value)}  rows={9} cols={50} /><br /><br />
 
-                        What is your unique selling proposition? ( Up to 200 words ) <br />
-                        <textarea type="text" placeholder='Enter unique selling proposition' value={capitalizeFirstLetter(uniqueSellingProposition)} onChange={(e) => setUniqueSellingProposition(e.target.value)}  maxLength={1500} rows={9} cols={50} /><br /><br />
-                        Category <br />
+                        <div className="inputfield">
+                            Name of the Product &nbsp;
+                            <input type="text" placeholder='Enter product name' value={capitalizeFullName(name)} onChange={(e) => setName(e.target.value)} autoCapitalize='' /> </div>
 
-                        <Select options={categoryOptions} value={category} onChange={handleCategoryChange}
-                            isMulti={true} 
-                        /> <br />
-                        Deploymenty <br />
-                        <Select options={deploymentOptions} value={deployment} onChange={handleDeploymentChange}
-                            isMulti={true} 
-                        />
+                        <div className="inputfield">
+                            Overview ( Up to 150 words )
+                            <textarea type="text" placeholder='Enter Overview' maxLength={1000} value={capitalizeFirstLetter(overview)} onChange={(e) => setOverview(e.target.value)} rows={9} cols={50} /></div>
 
-                        <br />
-                        Mobile Accessibility
-                        <input type="radio" name="Accessibility" id="accessibility" checked={accessibility === true}
-                            onChange={() => setAccessibility(true)}  /> True
-                        <input type="radio" name="Accessibility" id="accessibility" checked={!accessibility}
-                            onChange={() => setAccessibility(false)} />False <br /><br />
-                        Average adoption time &nbsp;
-                        <input type="number" value={adoptionTime} onChange={(e) => setAdoptionTime(e.target.value)}  />  
-                        <Select options={timeSelectionOptions} value={adoptionTimeSelected} onChange={(selectedOptions)=>setAdoptionTimeSelected(selectedOptions)}
-                       
-                          />  <br /><br />
-                        Focus Countries <br />
-                        <Select options={countryOptions} value={country} onChange={handleCountryChange}
-                            isMulti={true} 
-                        />
-                        <br />
-                        Languages
-                        <Select options={languageOptions} value={language} onChange={handleLanguageChange}
-                            isMulti={true} 
-                        />
+                        <div className="inputfield">
+                            What is your unique selling proposition? ( Up to 200 words )
+                            <textarea type="text" placeholder='Enter unique selling proposition' value={capitalizeFirstLetter(uniqueSellingProposition)} onChange={(e) => setUniqueSellingProposition(e.target.value)} maxLength={1500} rows={9} cols={50} /></div>
+
+                        <div className="inputfield">
+                            Category
+
+                            <Select options={categoryOptions} placeholder={"Select Category "} value={category} onChange={handleCategoryChange}
+                                isMulti={true}
+                            /> </div>
+
+                        <div className="inputfield">
+                            Deploymenty
+                            <Select options={deploymentOptions} placeholder={"Select Deployment "} value={deployment} onChange={handleDeploymentChange}
+                                isMulti={true}
+                            /></div>
+
+
+                        <div className="inputfield">
+                            Mobile Accessibility
+                            <div className="inputOptions">
+
+                                <input type="radio" name="Accessibility" id="accessibility" checked={accessibility === true}
+                                    onChange={() => setAccessibility(true)} /> True
+                                <input type="radio" name="Accessibility" id="accessibility" checked={!accessibility}
+                                    onChange={() => setAccessibility(false)} />False </div> </div>
+
+
+                        <div className="inputfield">
+                            Average adoption time &nbsp;
+                            <div className="inputOptions2">
+                                <input type="number"
+                                    value={adoptionTime}
+                                    onChange={(e) => setAdoptionTime(e.target.value)} />
+                                <Select placeholder={"Select storage type"}
+                                    options={timeSelectionOptions} value={adoptionTimeSelected}
+                                    onChange={(selectedOptions) => setAdoptionTimeSelected(selectedOptions)}
+
+                                /> </div> </div>
+
+                        <div className="inputfield">
+                            Focus Countries
+                            <Select options={countryOptions}
+                                placeholder={"Select Countries Maximum 5 "} value={country} onChange={handleCountryChange} 
+                                isMulti={true}
+                            /></div>
+
+
+                        <div className="inputfield">
+                            Languages
+                            <Select options={languageOptions} placeholder={"Select Language "} value={language} onChange={handleLanguageChange}
+                                isMulti={true}
+                            /></div>
                     </div>
 
 
 
                     <div className="category">
                         <h1>Target customers</h1>
-                        Customer segment
-                        <Select options={customerSegmentOptions} value={customerSegment} onChange={handleCustomerSegmentChange}
-                            isMulti={true}
-                        /><br />
-                        Write the percentage for each of the customer segments selected to show the distribution of customer segments &nbsp;
-                        <input type="number" placeholder='Enter Percentage less than or equal to 100' value={customerSegmentPercentage} onChange={(e) => setCustomerSegmentPercentage(e.target.value)}  max={100} />
-                        <br /><br />
-                        Industries
-                        <Select options={industryOptions} value={industries} onChange={handleIndustriesChange}
-                            isMulti={true}
-                        /><br />
-                        What are the practice areas your product can work into?
-                        *<br />
-                        <Select options={practiceAreaOptions} value={practiceAreas} onChange={handlePracticeAreasChange} isMulti={true} /><br />
-                        Client's team size
-                        <Select options={clientTeamSizeOptions} value={clientTeamSize} onChange={handleClientTeamSizeChange}
-                            isMulti={true}
-                        />
+
+                        <div className="inputfield">
+                            Customer segment
+                            <Select options={customerSegmentOptions} placeholder={"Select Customer Segment "} value={customerSegment} onChange={handleCustomerSegmentChange}
+                                isMulti={true}
+                            /></div>
+
+                        <div className="inputfield">
+                            Write the percentage for each of the customer segments selected to show the distribution of customer segments &nbsp;
+                            <input type="number" placeholder='Enter Percentage less than or equal to 100' value={customerSegmentPercentage} onChange={(e) => setCustomerSegmentPercentage(e.target.value)} max={100} />
+                        </div>
+
+                        <div className="inputfield">
+                            Industries
+                            <Select options={industryOptions} placeholder={"Select Industry  "} value={industries} onChange={handleIndustriesChange}
+                                isMulti={true}
+                            /></div>
+
+                        <div className="inputfield">
+                            What are the practice areas your product can work into?
+                            *
+                            <Select options={practiceAreaOptions} placeholder={"Select Practice Areas "} value={practiceAreas} onChange={handlePracticeAreasChange} isMulti={true} /></div>
+
+                        <div className="inputfield">
+                            Client's team size
+                            <Select options={clientTeamSizeOptions} placeholder={"Select Client's team size "} value={clientTeamSize} onChange={handleClientTeamSizeChange}
+                                isMulti={true}
+                            /></div>
                     </div>
 
                     <div className="category">
                         <h1>Features</h1>
                         <h3>Common to all</h3>
-                        Internal Collaboration <Select
-                            options={commonToAll.internalCollaboration}
-                            value={internalCollaboration}
-                            onChange={handleInternalCollaborationChange}
-                            isMulti={true}
-                        />
-                        External Collaboration <Select
-                            options={commonToAll.externalCollaboration}
-                            value={externalCollaboration}
-                            onChange={handleExternalCollaborationChange}
-                            isMulti={true}
-                        />
-                        Analytics and Reporting
-                        <Select
-                            options={commonToAll.analyticsAndReporting}
-                            value={analyticsAndReporting}
-                            onChange={handleAnalyticsAndReportingChange}
-                            isMulti={true}
-                        />
-                        Tool Administration and Control
-                        <Select
-                            options={commonToAll.toolAdministrationAndControl}
-                            value={toolAdministrationAndControlChange}
-                            onChange={handleToolAdministrationAndControlChange}
-                            isMulti={true}
-                        />
+                        <div className="inputfield">
+                            Internal Collaboration <Select
+                                options={commonToAll.internalCollaboration}
+                                value={internalCollaboration}
+
+                                onChange={handleInternalCollaborationChange}
+                                isMulti={true}
+                            /></div>
+
+                        <div className="inputfield">
+                            External Collaboration <Select
+                                options={commonToAll.externalCollaboration}
+                                value={externalCollaboration}
+                                onChange={handleExternalCollaborationChange}
+                                isMulti={true}
+                            /></div>
+
+                        <div className="inputfield">
+                            Analytics and Reporting
+                            <Select
+                                options={commonToAll.analyticsAndReporting}
+                                value={analyticsAndReporting}
+                                onChange={handleAnalyticsAndReportingChange}
+                                isMulti={true}
+                            /></div>
+
+                        <div className="inputfield">
+                            Tool Administration and Control
+                            <Select
+                                options={commonToAll.toolAdministrationAndControl}
+                                value={toolAdministrationAndControlChange}
+                                onChange={handleToolAdministrationAndControlChange}
+                                isMulti={true}
+                            /></div>
 
 
                         {clientManagementSoftware && (<div> <h3>Client Management Software</h3>
-                            Intake and Lead Management
-                            <Select
-                                options={clientManagementSoftwareOptions.intakeAndLeadManagement}
-                                value={intakeAndLeadManagement}
-                                onChange={handleIntakeAndLeadManagementChange}
-                                isMulti={true}
-                            />
-                            Client portal
-                            <Select
-                                options={clientManagementSoftwareOptions.clientPortal}
-                                value={clientPortal}
-                                onChange={handleClientPortalChange}
-                                isMulti={true}
-                            />
-                            Document management
-                            <Select
-                                options={clientManagementSoftwareOptions.documentManagement}
-                                value={documentManagement}
-                                onChange={handleDocumentManagementChange}
-                                isMulti={true}
-                            />
-                            Case Alerts
-                            <Select
-                                options={clientManagementSoftwareOptions.caseAlerts}
-                                value={caseAlerts}
-                                onChange={handleCaseAlertsChange}
-                                isMulti={true}
-                            />
-                            Budget, Expense and time tracking
-                            <Select
-                                options={clientManagementSoftwareOptions.budgetExpenseAndTimeTracking}
-                                value={budgetExpenseAndTimeTracking}
-                                onChange={handleBudgetExpenseAndTimeTrackingChange}
-                                isMulti={true}
-                            />
-                            Client billing and invoicing
-                            <Select
-                                options={clientManagementSoftwareOptions.clientBillingAndInvoicing}
-                                value={clientBillingAndInvoicing}
-                                onChange={handleClientBillingAndInvoicingChange}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Intake and Lead Management
+                                <Select
+                                    options={clientManagementSoftwareOptions.intakeAndLeadManagement}
+                                    value={intakeAndLeadManagement}
+                                    onChange={handleIntakeAndLeadManagementChange}
+                                    isMulti={true}
+                                /></div>
+
+                            <div className="inputfield">
+                                Client portal
+                                <Select
+                                    options={clientManagementSoftwareOptions.clientPortal}
+                                    value={clientPortal}
+                                    onChange={handleClientPortalChange}
+                                    isMulti={true}
+                                /></div>
+
+                            <div className="inputfield">
+                                Document management
+                                <Select
+                                    options={clientManagementSoftwareOptions.documentManagement}
+                                    value={documentManagement}
+                                    onChange={handleDocumentManagementChange}
+                                    isMulti={true}
+                                /></div>
+
+                            <div className="inputfield">
+                                Case Alerts
+                                <Select
+                                    options={clientManagementSoftwareOptions.caseAlerts}
+                                    value={caseAlerts}
+                                    onChange={handleCaseAlertsChange}
+                                    isMulti={true}
+                                /> </div>
+                            <div className="inputfield">
+                                Budget, Expense and time tracking
+                                <Select
+                                    options={clientManagementSoftwareOptions.budgetExpenseAndTimeTracking}
+                                    value={budgetExpenseAndTimeTracking}
+                                    onChange={handleBudgetExpenseAndTimeTrackingChange}
+                                    isMulti={true}
+                                /> </div>
+
+                            <div className="inputfield">
+                                Client billing and invoicing
+                                <Select
+                                    options={clientManagementSoftwareOptions.clientBillingAndInvoicing}
+                                    value={clientBillingAndInvoicing}
+                                    onChange={handleClientBillingAndInvoicingChange}
+                                    isMulti={true}
+                                /></div>
                         </div>)}
 
 
-                        {complianceAndRiskManagement && (<div> <h3>Compliance and Risk Management</h3>
-                            Policy Management
-                            <Select
-                                options={complianceAndRiskManagementOptions.policyManagement}
-                                value={policyManagement}
-                                onChange={handlePolicyManagementChange}
-                                isMulti={true}
-                            />
-                            Issue Management
-                            <Select
-                                options={complianceAndRiskManagementOptions.issueManagement}
-                                value={issueManagement}
-                                onChange={handleIssueManagementChange}
-                                isMulti={true}
-                            />
-                            Laws, Compliance and Regulatory tracking
-                            <Select
-                                options={complianceAndRiskManagementOptions.lawsComplianceAndRegulatoryTracking}
-                                value={lawsComplianceAndRegulatoryTracking}
-                                onChange={handleLawsComplianceAndRegulatoryTrackingChange}
-                                isMulti={true}
-                            />
+                        {complianceAndRiskManagement && (<div>
+                            <h3>Compliance and Risk Management</h3>
+                            <div className="inputfield">
+                                Policy Management
+                                <Select
+                                    options={complianceAndRiskManagementOptions.policyManagement}
+                                    value={policyManagement}
+                                    onChange={handlePolicyManagementChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Issue Management
+                                <Select
+                                    options={complianceAndRiskManagementOptions.issueManagement}
+                                    value={issueManagement}
+                                    onChange={handleIssueManagementChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Laws, Compliance and Regulatory tracking
+                                <Select
+                                    options={complianceAndRiskManagementOptions.lawsComplianceAndRegulatoryTracking}
+                                    value={lawsComplianceAndRegulatoryTracking}
+                                    onChange={handleLawsComplianceAndRegulatoryTrackingChange}
+                                    isMulti={true}
+                                /></div>
 
                         </div>)}
                         {contractManagementSoftware && (<div> <h3>Contract Management Software</h3>
-                            Contract creation and Authoring
-                            <Select
-                                options={contractManagementSoftwareOptions.contractCreationAndAuthoring}
-                                value={contractCreationAndAuthoring}
-                                onChange={handleContractCreationAndAuthoringChange}
-                                isMulti={true}
-                            />
-                            Contract Repository
-                            <Select
-                                options={contractManagementSoftwareOptions.contractRepository}
-                                value={contractRepository}
-                                onChange={handleContractRepositoryChange}
-                                isMulti={true}
-                            />
-                            Contract Negotiation
-                            <Select
-                                options={contractManagementSoftwareOptions.contractNegotiation}
-                                value={contractNegotiation}
-                                onChange={handleContractNegotiationChange}
-                                isMulti={true}
-                            />
-                            Lifecycle Management
-                            <Select
-                                options={contractManagementSoftwareOptions.lifecycleManagement}
-                                value={lifecycleManagement}
-                                onChange={handleLifecycleManagementChange}
-                                isMulti={true}
-                            />
-                            Clause library
-                            <Select
-                                options={contractManagementSoftwareOptions.clauseLibrary}
-                                value={clauseLibrary}
-                                onChange={handleClauseLibraryChange}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Contract creation and Authoring
+                                <Select
+                                    options={contractManagementSoftwareOptions.contractCreationAndAuthoring}
+                                    value={contractCreationAndAuthoring}
+                                    onChange={handleContractCreationAndAuthoringChange}
+                                    isMulti={true}
+                                /></div>
+
+                            <div className="inputfield">
+                                Contract Repository
+                                <Select
+                                    options={contractManagementSoftwareOptions.contractRepository}
+                                    value={contractRepository}
+                                    onChange={handleContractRepositoryChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Contract Negotiation
+                                <Select
+                                    options={contractManagementSoftwareOptions.contractNegotiation}
+                                    value={contractNegotiation}
+                                    onChange={handleContractNegotiationChange}
+                                    isMulti={true}
+                                /></div>
+
+                            <div className="inputfield">
+                                Lifecycle Management
+                                <Select
+                                    options={contractManagementSoftwareOptions.lifecycleManagement}
+                                    value={lifecycleManagement}
+                                    onChange={handleLifecycleManagementChange}
+                                    isMulti={true}
+                                /></div>
+
+                            <div className="inputfield">
+                                Clause library
+                                <Select
+                                    options={contractManagementSoftwareOptions.clauseLibrary}
+                                    value={clauseLibrary}
+                                    onChange={handleClauseLibraryChange}
+                                    isMulti={true}
+                                /></div>
 
                         </div>)}
 
 
 
                         {digitalSignature && (<div> <h3>Digital Signature</h3>
-                            Fields creation
-                            <Select
-                                options={digitalSignatureOptions.fieldsCreation}
-                                value={fieldsCreation}
-                                onChange={handleFieldsCreationChange}
-                                isMulti={true}
-                            />
-                            Tracking and validity
-                            <Select
-                                options={digitalSignatureOptions.trackingAndValidity}
-                                value={trackingAndValidity}
-                                onChange={handleTrackingAndValidityChange}
-                                isMulti={true}
-                            />
-                            Document management and Templates
-                            <Select
-                                options={digitalSignatureOptions.documentManagementAndTemplates}
-                                value={documentManagementAndTemplates}
-                                onChange={handleDocumentManagementAndTemplatesChange}
-                                isMulti={true}
-                            />
-                            Document capturing
-                            <Select
-                                options={digitalSignatureOptions.documentCapturing}
-                                value={documentCapturing}
-                                onChange={handleDocumentCapturingChange}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Fields creation
+                                <Select
+                                    options={digitalSignatureOptions.fieldsCreation}
+                                    value={fieldsCreation}
+                                    onChange={handleFieldsCreationChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Tracking and validity
+                                <Select
+                                    options={digitalSignatureOptions.trackingAndValidity}
+                                    value={trackingAndValidity}
+                                    onChange={handleTrackingAndValidityChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Document management and Templates
+                                <Select
+                                    options={digitalSignatureOptions.documentManagementAndTemplates}
+                                    value={documentManagementAndTemplates}
+                                    onChange={handleDocumentManagementAndTemplatesChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Document capturing
+                                <Select
+                                    options={digitalSignatureOptions.documentCapturing}
+                                    value={documentCapturing}
+                                    onChange={handleDocumentCapturingChange}
+                                    isMulti={true}
+                                /></div>
 
 
                         </div>)}
                         {documentManagementAndAutomation && (<div> <h3>Document Management and Automation</h3>
-                            Document Creation and templates
-                            <Select
-                                options={documentManagementAndAutomationOptions.documentCreationAndTemplates}
-                                value={documentCreationAndTemplates}
-                                onChange={handleDocumentCreationAndTemplatesChange}
-                                isMulti={true}
-                            />
-                            Document capturing
-                            <Select
-                                options={documentManagementAndAutomationOptions.documentCapturing}
-                                value={documentCapturing2}
-                                onChange={handledDocumentCapturingChange2}
-                                isMulti={true}
-                            />
-                            Document search and navigation
-                            <Select
-                                options={documentManagementAndAutomationOptions.documentSearchAndNavigation}
-                                value={documentSearchAndNavigation}
-                                onChange={handleDocumentSearchAndNavigationChange}
-                                isMulti={true}
-                            />
-                            Authentication
-                            <Select
-                                options={documentManagementAndAutomationOptions.authentication}
-                                value={authentication}
-                                onChange={handleAuthenticationChange}
-                                isMulti={true}
-                            />
-                            Task allotment
-                            <Select
-                                options={documentManagementAndAutomationOptions.taskAllotment}
-                                value={taskAllotment}
-                                onChange={handleTaskAllotmentChange}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Document Creation and templates
+                                <Select
+                                    options={documentManagementAndAutomationOptions.documentCreationAndTemplates}
+                                    value={documentCreationAndTemplates}
+                                    onChange={handleDocumentCreationAndTemplatesChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Document capturing
+                                <Select
+                                    options={documentManagementAndAutomationOptions.documentCapturing}
+                                    value={documentCapturing2}
+                                    onChange={handledDocumentCapturingChange2}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Document search and navigation
+                                <Select
+                                    options={documentManagementAndAutomationOptions.documentSearchAndNavigation}
+                                    value={documentSearchAndNavigation}
+                                    onChange={handleDocumentSearchAndNavigationChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Authentication
+                                <Select
+                                    options={documentManagementAndAutomationOptions.authentication}
+                                    value={authentication}
+                                    onChange={handleAuthenticationChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Task allotment
+                                <Select
+                                    options={documentManagementAndAutomationOptions.taskAllotment}
+                                    value={taskAllotment}
+                                    onChange={handleTaskAllotmentChange}
+                                    isMulti={true}
+                                /></div>
 
 
                         </div>)}
                         {EBillingAndInvoicing && (<div> <h3>E-billing and Invoicing</h3>
-                            Budgeting, Expense and time tracking
-                            <Select
-                                options={EBillingAndInvoicingOptions.budgetingExpenseAndTimeTracking}
-                                value={budgetingExpenseAndTimeTracking}
-                                onChange={handleBudgetingExpenseAndTimeTrackingChange}
-                                isMulti={true}
-                            />
-                            Client management
-                            <Select
-                                options={EBillingAndInvoicingOptions.clientManagement}
-                                value={clientManagement}
-                                onChange={handleClientManagementChange}
-                                isMulti={true}
-                            />
-                            Invoice generation and review
-                            <Select
-                                options={EBillingAndInvoicingOptions.invoiceGenerationAndReview}
-                                value={invoiceGenerationAndReview}
-                                onChange={handleInvoiceGenerationAndReviewChange}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Budgeting, Expense and time tracking
+                                <Select
+                                    options={EBillingAndInvoicingOptions.budgetingExpenseAndTimeTracking}
+                                    value={budgetingExpenseAndTimeTracking}
+                                    onChange={handleBudgetingExpenseAndTimeTrackingChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Client management
+                                <Select
+                                    options={EBillingAndInvoicingOptions.clientManagement}
+                                    value={clientManagement}
+                                    onChange={handleClientManagementChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Invoice generation and review
+                                <Select
+                                    options={EBillingAndInvoicingOptions.invoiceGenerationAndReview}
+                                    value={invoiceGenerationAndReview}
+                                    onChange={handleInvoiceGenerationAndReviewChange}
+                                    isMulti={true}
+                                /></div>
                         </div>)}
                         {eDiscovery && (<div> <h3>E-discovery</h3>
-                            Data identification and collection
-                            <Select
-                                options={EDiscoveryOptions.dataIdentificationAndCollection}
-                                value={dataIdentificationAndCollection}
-                                onChange={handleDataIdentificationAndCollectionChange}
-                                isMulti={true}
-                            />
-                            Search, Processing and Analysis
-                            <Select
-                                options={EDiscoveryOptions.searchProcessingAndAnalysis}
-                                value={searchProcessingAndAnalysis}
-                                onChange={handleSearchProcessingAndAnalysisChange}
-                                isMulti={true}
-                            />
-                            Review and Production
-                            <Select
-                                options={EDiscoveryOptions.reviewAndProduction}
-                                value={reviewAndProduction}
-                                onChange={handleReviewAndProductionChange}
-                                isMulti={true}
-                            />
-                            Legal Hold management
-                            <Select
-                                options={EDiscoveryOptions.legalHoldManagement}
-                                value={legalHoldManagement}
-                                onChange={handleLegalHoldManagementChange}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Data identification and collection
+                                <Select
+                                    options={EDiscoveryOptions.dataIdentificationAndCollection}
+                                    value={dataIdentificationAndCollection}
+                                    onChange={handleDataIdentificationAndCollectionChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Search, Processing and Analysis
+                                <Select
+                                    options={EDiscoveryOptions.searchProcessingAndAnalysis}
+                                    value={searchProcessingAndAnalysis}
+                                    onChange={handleSearchProcessingAndAnalysisChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Review and Production
+                                <Select
+                                    options={EDiscoveryOptions.reviewAndProduction}
+                                    value={reviewAndProduction}
+                                    onChange={handleReviewAndProductionChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Legal Hold management
+                                <Select
+                                    options={EDiscoveryOptions.legalHoldManagement}
+                                    value={legalHoldManagement}
+                                    onChange={handleLegalHoldManagementChange}
+                                    isMulti={true}
+                                /></div>
                         </div>)}
                         {intellectualPropertyManagement && (<div> <h3> Intellectual Property Management</h3>
-                            Ideation and creation
-                            <Select
-                                options={intellectualPropertyManagementOptions.ideationAndCreation}
-                                value={ideationAndCreation}
-                                onChange={handleIdeationAndCreationChange}
-                                isMulti={true}
-                            />
-                            Lifecycle Management
-                            <Select
-                                options={intellectualPropertyManagementOptions.lifecycleManagement2}
-                                value={lifecycleManagement2}
-                                onChange={handleLifecycleManagement2Change}
-                                isMulti={true}
-                            />
-                            Search and Discovery
-                            <Select
-                                options={intellectualPropertyManagementOptions.searchAndDiscovery}
-                                value={searchAndDiscovery}
-                                onChange={handleSearchAndDiscoveryChange}
-                                isMulti={true}
-                            />
-                            Storage and Repository
-                            <Select
-                                options={intellectualPropertyManagementOptions.storageAndRepository}
-                                value={storageAndRepository}
-                                onChange={handleStorageAndRepositoryChange}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Ideation and creation
+                                <Select
+                                    options={intellectualPropertyManagementOptions.ideationAndCreation}
+                                    value={ideationAndCreation}
+                                    onChange={handleIdeationAndCreationChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Lifecycle Management
+                                <Select
+                                    options={intellectualPropertyManagementOptions.lifecycleManagement2}
+                                    value={lifecycleManagement2}
+                                    onChange={handleLifecycleManagement2Change}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Search and Discovery
+                                <Select
+                                    options={intellectualPropertyManagementOptions.searchAndDiscovery}
+                                    value={searchAndDiscovery}
+                                    onChange={handleSearchAndDiscoveryChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Storage and Repository
+                                <Select
+                                    options={intellectualPropertyManagementOptions.storageAndRepository}
+                                    value={storageAndRepository}
+                                    onChange={handleStorageAndRepositoryChange}
+                                    isMulti={true}
+                                /></div>
                         </div>)}
                         {litigationManagementAndAnalytics && (<div> <h3>Litigation Management and Analytics</h3>
-                            Matter lifecycle tracking
-                            <Select
-                                options={litigationManagementAndAnalyticsOptions.matterLifecycleTracking}
-                                value={matterLifecycleTracking}
-                                onChange={handleMatterLifecycleTrackingChange}
-                                isMulti={true}
-                            />
-                            Court and case search
-                            <Select
-                                options={litigationManagementAndAnalyticsOptions.courtAndCaseSearch}
-                                value={courtAndCaseSearch}
-                                onChange={handleCourtAndCaseSearchChange}
-                                isMulti={true}
-                            />
-                            Budget, Expense and time tracking
-                            <Select
-                                options={litigationManagementAndAnalyticsOptions.budgetExpenseAndTimeTracking2}
-                                value={budgetExpenseAndTimeTracking2}
-                                onChange={handleBudgetExpenseAndTimeTracking2Change}
-                                isMulti={true}
-                            />
-                            Litigation docketing features
-                            <Select
-                                options={litigationManagementAndAnalyticsOptions.litigationDocketingFeatures}
-                                value={litigationDocketingFeatures}
-                                onChange={handleLitigationDocketingFeaturesChange}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Matter lifecycle tracking
+                                <Select
+                                    options={litigationManagementAndAnalyticsOptions.matterLifecycleTracking}
+                                    value={matterLifecycleTracking}
+                                    onChange={handleMatterLifecycleTrackingChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Court and case search
+                                <Select
+                                    options={litigationManagementAndAnalyticsOptions.courtAndCaseSearch}
+                                    value={courtAndCaseSearch}
+                                    onChange={handleCourtAndCaseSearchChange}
+                                    isMulti={true}
+                                /></div>
+
+                            <div className="inputfield">
+                                Budget, Expense and time tracking
+                                <Select
+                                    options={litigationManagementAndAnalyticsOptions.budgetExpenseAndTimeTracking2}
+                                    value={budgetExpenseAndTimeTracking2}
+                                    onChange={handleBudgetExpenseAndTimeTracking2Change}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Litigation docketing features
+                                <Select
+                                    options={litigationManagementAndAnalyticsOptions.litigationDocketingFeatures}
+                                    value={litigationDocketingFeatures}
+                                    onChange={handleLitigationDocketingFeaturesChange}
+                                    isMulti={true}
+                                /></div>
                         </div>)}
                         {legalWorkflowAutomation && (<div> <h3>Legal Workflow Automation</h3>
-                            Workflow design and configuration
-                            <Select
-                                options={legalWorkflowAutomationOptions.workflowDesignAndConfiguration}
-                                value={workflowDesignAndConfiguration}
-                                onChange={handleWorkflowDesignAndConfigurationChange}
-                                isMulti={true}
-                            />
-                            Assignment allotment and tracking
-                            <Select
-                                options={legalWorkflowAutomationOptions.assignmentAllotmentAndTracking}
-                                value={assignmentAllotmentAndTracking}
-                                onChange={handleAssignmentAllotmentAndTrackingChange}
-                                isMulti={true}
-                            />
-                            Document creation and management
-                            <Select
-                                options={legalWorkflowAutomationOptions.documentCreationAndManagement}
-                                value={documentCreationAndManagement}
-                                onChange={handleDocumentCreationAndManagementChange}
-                                isMulti={true}
-                            />
-                            Laws, Compliance and Regulatory tracking
-                            <Select
-                                options={legalWorkflowAutomationOptions.lawsComplianceAndRegulatoryTracking2}
-                                value={lawsComplianceAndRegulatoryTracking2}
-                                onChange={handleLawsComplianceAndRegulatoryTracking2Change}
-                                isMulti={true}
-                            />
+                            <div className="inputfield">
+                                Workflow design and configuration
+                                <Select
+                                    options={legalWorkflowAutomationOptions.workflowDesignAndConfiguration}
+                                    value={workflowDesignAndConfiguration}
+                                    onChange={handleWorkflowDesignAndConfigurationChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Assignment allotment and tracking
+                                <Select
+                                    options={legalWorkflowAutomationOptions.assignmentAllotmentAndTracking}
+                                    value={assignmentAllotmentAndTracking}
+                                    onChange={handleAssignmentAllotmentAndTrackingChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Document creation and management
+                                <Select
+                                    options={legalWorkflowAutomationOptions.documentCreationAndManagement}
+                                    value={documentCreationAndManagement}
+                                    onChange={handleDocumentCreationAndManagementChange}
+                                    isMulti={true}
+                                /></div>
+                            <div className="inputfield">
+                                Laws, Compliance and Regulatory tracking
+                                <Select
+                                    options={legalWorkflowAutomationOptions.lawsComplianceAndRegulatoryTracking2}
+                                    value={lawsComplianceAndRegulatoryTracking2}
+                                    onChange={handleLawsComplianceAndRegulatoryTracking2Change}
+                                    isMulti={true}
+                                /></div>
                         </div>)}
                     </div>
 
                     <div className="category">
                         <h1>Pricing Plan</h1>
-                        Minimum Contract period &nbsp;
-                        <input type="number" placeholder='Enter Pricing Type' value={minimumContractPeriod} onChange={(e) => setMinimumContractPeriod(e.target.value)} /> <Select style={{ display: "inline" }} options={timeSelectionOptions} value={minimumContractPeriodSelected} onChange={(selectedOptions)=>setMinimumContractPeriodSelected(selectedOptions)}
-                             /> <br />
+                        <div className="inputfield">
+                            Minimum Contract period &nbsp;
+                            <div className="inputOptions2">
+                                <input type="number" placeholder='Enter Pricing Type' value={minimumContractPeriod} onChange={(e) => setMinimumContractPeriod(e.target.value)} /> <Select style={{ display: "inline" }} options={timeSelectionOptions} value={minimumContractPeriodSelected} placeholder={"Select period "} onChange={(selectedOptions) => setMinimumContractPeriodSelected(selectedOptions)}
+                                /></div> </div>
+                        <div className="inputfield">
+                            Free Trial
+                            <div className="inputOptions">
+                                <input type="radio" name="freeTrial" id="freeTrial" checked={freeTrial === true}
+                                    onChange={() => setFreeTrial(true)} /> Yes
+                                <input type="radio" name="freeTrial" id="freeTrial" checked={!freeTrial}
+                                    onChange={() => setFreeTrial(false)} />No </div> </div>
 
-                        Free Trial
-                        <input type="radio" name="freeTrial" id="freeTrial" checked={freeTrial === true}
-                            onChange={() => setFreeTrial(true)} /> Yes
-                        <input type="radio" name="freeTrial" id="freeTrial" checked={!freeTrial}
-                            onChange={() => setFreeTrial(false)} />No <br /><br />
-                        Free Plan
-                        <input type="radio" name="freePlan" id="freePlan" checked={freePlan === true}
-                            onChange={() => setFreePlan(true)} /> Yes
-                        <input type="radio" name="freePlan" id="freePlan" checked={!freePlan}
-                            onChange={() => setFreePlan(false)} />No <br /><br />
+                        <div className="inputfield">
+                            Free Plan
+                            <div className="inputOptions">
+                                <input type="radio" name="freePlan" id="freePlan" checked={freePlan === true}
+                                    onChange={() => setFreePlan(true)} /> Yes
+                                <input type="radio" name="freePlan" id="freePlan" checked={!freePlan}
+                                    onChange={() => setFreePlan(false)} />No </div></div>
 
                         <h3>Plan 1</h3>
-                        Feature  1
-                        <input type="text" placeholder='Enter Feature 1' value={plan1Feature1} onChange={(e) => setPlan1Feature1(e.target.value)}  /><br />
-                        {plan1Feature1 && <div> Feature  2
-                            <input type="text" placeholder='Enter Feature 2' value={plan1Feature2} onChange={(e) => setPlan1Feature2(e.target.value)}  /> </div>}
-                        {plan1Feature1 && plan1Feature2 && <div> Feature  3
-                            <input type="text" placeholder='Enter Feature 3' value={plan1Feature3} onChange={(e) => setPlan1Feature3(e.target.value)}  /> </div>}<br />
+                        <div className="inputfield">
+                            Feature  1
+                            <input type="text" placeholder='Enter Feature 1' value={plan1Feature1} onChange={(e) => setPlan1Feature1(e.target.value)} /></div>
+                        {plan1Feature1 &&
+                            <div className="inputfield">
+                                Feature  2
+                                <input type="text" placeholder='Enter Feature 2' value={plan1Feature2} onChange={(e) => setPlan1Feature2(e.target.value)} /> </div>}
+                        {plan1Feature1 && plan1Feature2 && <div className="inputfield">   Feature  3
+                            <input type="text" placeholder='Enter Feature 3' value={plan1Feature3} onChange={(e) => setPlan1Feature3(e.target.value)} /> </div>}
 
 
                         {plan1Feature1 && plan1Feature2 && plan1Feature3 && <div>
                             <h3>Plan 2</h3>
-                            Feature  1
-                            <input type="text" placeholder='Enter Feature 1' value={plan2Feature1} onChange={(e) => setPlan2Feature1(e.target.value)}  /><br />
-                            {plan2Feature1 && <div> Feature  2
-                                <input type="text" placeholder='Enter Feature 2' value={plan2Feature2} onChange={(e) => setPlan2Feature2(e.target.value)}  /> </div>}
-                            {plan2Feature1 && plan2Feature2 && <div> Feature  3
-                                <input type="text" placeholder='Enter Feature 3' value={plan2Feature3} onChange={(e) => setPlan2Feature3(e.target.value)}  /> </div>}<br />
+                            <div className="inputfield">
+                                Feature  1
+                                <input type="text" placeholder='Enter Feature 1' value={plan2Feature1} onChange={(e) => setPlan2Feature1(e.target.value)} /></div>
+                            {plan2Feature1 && <div className="inputfield">   Feature  2
+                                <input type="text" placeholder='Enter Feature 2' value={plan2Feature2} onChange={(e) => setPlan2Feature2(e.target.value)} /> </div>}
+                            {plan2Feature1 && plan2Feature2 && <div className="inputfield">   Feature  3
+                                <input type="text" placeholder='Enter Feature 3' value={plan2Feature3} onChange={(e) => setPlan2Feature3(e.target.value)} /> </div>}
 
                         </div>
                         }
@@ -949,109 +1055,143 @@ const Products = () => {
 
                     <div className="category">
                         <h1>References</h1>
-                        Video Link &nbsp;
-                        <input type="text" placeholder='Enter Youtube Video Link Only one' value={capitalizeFirstLetter(videoLink)} onChange={(e) => setVideoLink(e.target.value)} />
+                        <div className="inputfield">
+                            Video Link &nbsp;
+                            <input type="text" placeholder='Enter Youtube Video Link Only one' value={capitalizeFirstLetter(videoLink)} onChange={(e) => setVideoLink(e.target.value)} /></div>
                         {/* Images ( upto 5) */}
-                        {/* <input type="text" /> */}<br /><br />
-                        Know how
-                        documents &nbsp;
-                        <input type="text" placeholder='Enter Document Link here' value={knowHowDocument} onChange={(e) => setKnowHowDocument(e.target.value)} /><br /><br />
+                        {/* <input type="text" /> */}
+                        <div className="inputfield">
+                            Know how
+                            documents &nbsp;
+                            <input type="text" placeholder='Enter Document Link here' value={knowHowDocument} onChange={(e) => setKnowHowDocument(e.target.value)} /></div>
 
-                        Linkedin &nbsp;
-                        <input type="text" placeholder="Linkedin Link here" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} /> <br /><br />
-                        Instagram &nbsp;
-                        <input type="text" placeholder="Instagram Link here" value={instagram} onChange={(e) => setInstagram(e.target.value)} /> <br /><br />
-                        X(Twitter) &nbsp;
-                        <input type="text" placeholder="X(Twitter)" value={twitter} onChange={(e) => setTwitter(e.target.value)} /> <br /><br />
-                        Youtube &nbsp;
-                        <input type="text" placeholder="Youtube" value={youtube} onChange={(e) => setYoutube(e.target.value)} />
-                        <br /><br />
-                        Any Other Link &nbsp;
-                        <input type="text" placeholder="Youtube" value={otherLink} onChange={(e) => setOtherLink(e.target.value)} />
+                        <div className="inputfield">
+                            Linkedin &nbsp;
+                            <input type="text" placeholder="Linkedin Link here" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} /> </div>
+                        <div className="inputfield">
+                            Instagram &nbsp;
+                            <input type="text" placeholder="Instagram Link here" value={instagram} onChange={(e) => setInstagram(e.target.value)} /></div>
+                        <div className="inputfield">
+                            X(Twitter) &nbsp;
+                            <input type="text" placeholder="X(Twitter)" value={twitter} onChange={(e) => setTwitter(e.target.value)} /></div>
+
+                        <div className="inputfield">
+                            Youtube &nbsp;
+                            <input type="text" placeholder="Youtube" value={youtube} onChange={(e) => setYoutube(e.target.value)} /></div>
+
+                        <div className="inputfield">
+                            Any Other Link &nbsp;
+                            <input type="text" placeholder="Youtube" value={otherLink} onChange={(e) => setOtherLink(e.target.value)} /></div>
                     </div>
 
                     <div className="category">
                         <h1>Services and Support</h1>
-                        Demo
-                        If yes, then choose out of <Select
-                            options={demoOptions}
-                            value={demoData}
-                            onChange={handleDemoDataChange}
-                            isMulti={true}
-                        /><br />
-                        Add demo link (if any) <br /> <input type="text" placeholder='Enter product name' value={demoLink} onChange={(e) => setDemoLink(e.target.value)} /><br /><br />
-                        {/* <input type="text" placeholder='Enter Practice Areas' value={demoNote} onChange={(e) => setDemoNote(e.target.value)} /><br /><br /> */}
-                        Support
-                        If yes, then choose from these:<Select
-                            options={supportOptions}
-                            value={supportData}
-                            onChange={handleSupportDataChange}
-                            isMulti={true}
-                        />
-                        <br />
-                        Training
-                        If yes, then choose from these:<Select
-                            options={trainingOptions}
-                            value={trainingData}
-                            onChange={handleTrainingDataChange}
-                            isMulti={true}
-                        />
-                        Storage
-                        (Enter the storage capacity in GB) &nbsp;
-                        <input type="number" placeholder='' value={storage} onChange={(e) => setStorage(e.target.value)} max={1048} />GB
-                        <br /><br />
-                        File size limit (if any) &nbsp;
-                        <input type="number" placeholder='' value={fileSize} onChange={(e) => setFileSize(e.target.value)} />
-                        <Select options={memoryOptions} value={memoryChange} onChange={(selectedOptions)=>setMemoryChange(selectedOptions)} />
+                        <div className="inputfield">
+                            Demo
+                            If yes, then choose out of <Select
+                                options={demoOptions}
+                                value={demoData}
+                                onChange={handleDemoDataChange}
+                                placeholder={"Select Demo "}
+                                isMulti={true}
+                            /></div>
+                        <div className="inputfield">
+                            Add demo link (if any)  <input type="text" placeholder='Enter product name' value={demoLink} onChange={(e) => setDemoLink(e.target.value)} /></div>
+                        {/* <input type="text" placeholder='Enter Practice Areas' value={demoNote} onChange={(e) => setDemoNote(e.target.value)} /> */}
+                        <div className="inputfield">
+                            Support
+                            If yes, then choose from these:<Select
+                                options={supportOptions}
+                                value={supportData}
+                                onChange={handleSupportDataChange}
+                                placeholder={"Select Support Options "}
+                                isMulti={true}
+                            /></div>
+
+                        <div className="inputfield">
+                            Training
+                            If yes, then choose from these:<Select
+                                options={trainingOptions}
+                                value={trainingData}
+                                placeholder={"Select Training Options "}
+                                onChange={handleTrainingDataChange}
+                                isMulti={true}
+                            /></div>
+                        <div className="inputfield">
+                            Storage
+                            (Enter the storage capacity in GB) &nbsp;
+                            <div className="inputOptions2">
+                                <input type="number" placeholder='' value={storage} onChange={(e) => setStorage(e.target.value)} max={1048} />
+                                <Select options={memoryOptions} value={storageChange} onChange={(selectedOptions) => setStorageChange(selectedOptions)} placeholder={"Select Memory type"} /></div></div>
+
+
+                        <div className="inputfield">
+                            File size limit (if any) &nbsp;
+                            <div className="inputOptions2">
+                                <input type="number" placeholder='' value={fileSize} onChange={(e) => setFileSize(e.target.value)} />
+                                <Select options={memoryOptions} value={fileSizeChange} onChange={(selectedOptions) => setFileSizeChange(selectedOptions)} placeholder={"Select Memory type"} /></div></div>
                     </div>
-                    <h1>Post Implementation services</h1>
-                    Request for change
-                    <input type="radio" name="request" id="request" checked={requestForChange === true}
-                        onChange={() => setRequestForChange(true)} /> Free
-                    <input type="radio" name="request" id="request" checked={!requestForChange}
-                        onChange={() => setRequestForChange(false)} />Paid <br /><br />
-
-                    Training
-                    <input type="radio" name="training_2" id="training_2" checked={postImplementationTraining === true}
-                        onChange={() => setPostImplementationTraining(true)} /> Free
-                    <input type="radio" name="training_2" id="training_2" checked={!postImplementationTraining}
-                        onChange={() => setPostImplementationTraining(false)} />Paid  <br /><br />
-
-                    Data Migration
-                    <input type="radio" name="migration" id="migration" checked={dataMigration === true}
-                        onChange={() => setDataMigration(true)} /> Free
-                    <input type="radio" name="migration" id="migration" checked={!dataMigration}
-                        onChange={() => setDataMigration(false)} />Paid
-                    <div>
-
+                    <div className="category">
+                        <h1>Post Implementation services</h1>
+                        <div className="inputfield">
+                            Request for change
+                            <div className="inputOptions">
+                                <input type="radio" name="request" id="request" checked={requestForChange === true}
+                                    onChange={() => setRequestForChange(true)} /> Free
+                                <input type="radio" name="request" id="request" checked={!requestForChange}
+                                    onChange={() => setRequestForChange(false)} />Paid </div> </div>
+                        <div className="inputfield">
+                            Training
+                            <div className="inputOptions">
+                                <input type="radio" name="training_2" id="training_2" checked={postImplementationTraining === true}
+                                    onChange={() => setPostImplementationTraining(true)} /> Free
+                                <input type="radio" name="training_2" id="training_2" checked={!postImplementationTraining}
+                                    onChange={() => setPostImplementationTraining(false)} />Paid </div></div>
+                        <div className="inputfield">
+                            Data Migration
+                            <div className="inputOptions">
+                                <input type="radio" name="migration" id="migration" checked={dataMigration === true}
+                                    onChange={() => setDataMigration(true)} /> Free
+                                <input type="radio" name="migration" id="migration" checked={!dataMigration}
+                                    onChange={() => setDataMigration(false)} />Paid</div></div>
+                        <div>
+                        </div>
 
                         <h1>User Testimonial 1 </h1>
-                        Name &nbsp;
-                        <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialName1)} onChange={(e) => setUserTestimonialName1(e.target.value)} /><br /><br />
-                        {userTestimonialName1 && <div>Designation &nbsp;
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialDesignation1)} onChange={(e) => setUserTestimonialDesignation1(e.target.value)} /><br /><br />
-                            Company/Organization &nbsp;
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialCompany1)} onChange={(e) => setUserTestimonialCompany1(e.target.value)} /><br /><br />
-                            Comment &nbsp;
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialComment1)} onChange={(e) => setUserTestimonialComment1(e.target.value)} /> </div>}
+                        <div className="inputfield">
+                            Name &nbsp;
+                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialName1)} onChange={(e) => setUserTestimonialName1(e.target.value)} /></div>
+                        {userTestimonialName1 && <div> <div className="inputfield">  Designation &nbsp;
+                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialDesignation1)} onChange={(e) => setUserTestimonialDesignation1(e.target.value)} /></div>
+                            <div className="inputfield">
+                                Company/Organization &nbsp;
+                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialCompany1)} onChange={(e) => setUserTestimonialCompany1(e.target.value)} /></div>
+                            <div className="inputfield">
+                                Comment &nbsp;
+                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialComment1)} onChange={(e) => setUserTestimonialComment1(e.target.value)} /></div> </div>}
 
-                        <div> <br />
+                        <div>
+
                             Click To Add Another Testimonial <button
                                 value={isSecondTestimonial} onClick={handleSecondTestimonial}>Click Here</button> </div>
                         {isSecondTestimonial && userTestimonialName1 && userTestimonialDesignation1 && userTestimonialCompany1 && userTestimonialComment1 && <div>
                             <h1>User Testimonial 2</h1>
-                            Name
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialName2)} onChange={(e) => setUserTestimonialName2(e.target.value)
+                            <div className="inputfield">
+                                Name
+                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialName2)} onChange={(e) => setUserTestimonialName2(e.target.value)
 
-                            } /></div>}<br />
+                                } /></div></div>}
 
                         {isSecondTestimonial && userTestimonialName1 && userTestimonialDesignation1 && userTestimonialCompany1 && userTestimonialComment1 && userTestimonialName2 && <div>
-                            Designation &nbsp;
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialDesignation2)} onChange={(e) => setUserTestimonialDesignation2(e.target.value)} /><br /><br />
-                            Company/Organization &nbsp;
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialCompany2)} onChange={(e) => setUserTestimonialCompany2(e.target.value)} /> <br /><br />
-                            Comment &nbsp;
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialComment2)} onChange={(e) => setUserTestimonialComment2(e.target.value)} /> </div>}
+                            <div className="inputfield">
+                                Designation &nbsp;
+                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialDesignation2)} onChange={(e) => setUserTestimonialDesignation2(e.target.value)} /></div>
+                            <div className="inputfield">
+                                Company/Organization &nbsp;
+                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialCompany2)} onChange={(e) => setUserTestimonialCompany2(e.target.value)} /> </div>
+                            <div className="inputfield">
+                                Comment &nbsp;
+                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialComment2)} onChange={(e) => setUserTestimonialComment2(e.target.value)} /></div> </div>}
 
                     </div>
 
