@@ -4,6 +4,7 @@ import '../Styles/products.scss'
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import Select from 'react-select';
+import { isURL } from 'validator';
 import { categoryOptions } from '../Assets/JSON/Category';
 import { deploymentOptions } from '../Assets/JSON/Deployment';
 import { countryOptions } from '../Assets/JSON/Country';
@@ -94,25 +95,51 @@ const Products = () => {
 
     const [language, setLanguage] = useState([])
     const [customerSegment, setCustomerSegment] = useState([])
-    const [customerSegmentPercentage, setCustomerSegmentPercentage] = useState(0)
+    // Customer segment
+    const [individualPractitioners, setIndividualPractitioners] = useState(false);
+    const [lawFirms, setLawFirms] = useState(false);
+    const [inHouseLegalDepartments, setInHouseLegalDepartments] = useState(false);
+    const [enterprises, setEnterprises] = useState(false);
+    const [judiciary, setJudiciary] = useState(false);
+    const [governmentDepartments, setGovernmentDepartments] = useState(false);
+    const [startups, setStartups] = useState(false);
+    // Customer Segment Percentage  
+    const [individualPractitionersPercentage, setIndividualPractitionersPercentage] = useState(0);
+    const [lawFirmsPercentage, setLawFirmsPercentage] = useState(0);
+    const [inHouseLegalDepartmentsPercentage, setInHouseLegalDepartmentsPercentage] = useState(0);
+    const [enterprisesPercentage, setEnterprisesPercentage] = useState(0);
+    const [judiciaryPercentage, setJudiciaryPercentage] = useState(0);
+    const [governmentDepartmentsPercentage, setGovernmentDepartmentsPercentage] = useState(0);
+    const [startupsPercentage, setStartupsPercentage] = useState(0);
+
     const [industries, setIndustries] = useState([])
     const [practiceAreas, setPracticeAreas] = useState("")
     const [clientTeamSize, setClientTeamSize] = useState([])
     const [minimumContractPeriod, setMinimumContractPeriod] = useState(Number)
     const [minimumContractPeriodSelected, setMinimumContractPeriodSelected] = useState(Number)
-
     const [videoLink, setVideoLink] = useState("")
+    const [videoLinkValid, setVideoLinkValid] = useState("")
     const [images, setImages] = useState("")
-
-    const [knowHowDocument, setKnowHowDocument] = useState("")
+    const [knowHowDocument1, setKnowHowDocument1] = useState("")
+    const [knowHowDocument2, setKnowHowDocument2] = useState("")
+    const [knowHowDocument3, setKnowHowDocument3] = useState("")
+    const [knowHowDocument1Valid, setKnowHowDocument1Valid] = useState("")
+    const [knowHowDocument2Valid, setKnowHowDocument2Valid] = useState("")
+    const [knowHowDocument3Valid, setKnowHowDocument3Valid] = useState("")
     const [linkedIn, setLinkedIn] = useState("")
+    const [linkedInValid, setLinkedInValid] = useState("")
     const [instagram, setInstagram] = useState("")
+    const [instagramValid, setInstagramValid] = useState("")
     const [twitter, setTwitter] = useState("")
+    const [twitterValid, setTwitterValid] = useState("")
     const [youtube, setYoutube] = useState("")
+    const [youtubeValid, setYoutubeValid] = useState("")
     const [otherLink, setOtherLink] = useState("")
+    const [otherLinkValid, setOtherLinkValid] = useState("")
     const [demo, setDemo] = useState(Boolean)
     const [demoData, setDemoData] = useState([])
     const [demoLink, setDemoLink] = useState("")
+    const [demoLinkValid, setDemoLinkValid] = useState("")
 
     const [support, setSupport] = useState(Boolean)
     const [supportData, setSupportData] = useState([])
@@ -160,7 +187,7 @@ const Products = () => {
         e.preventDefault();
 
         const { data } = await axios.post("https://dreamlegalproductbackend.onrender.com/api/products/new", {
-            name, overview, uniqueSellingProposition, category, deployment, accessibility, adoptionTime, country, language, customerSegment, customerSegmentPercentage, industries, practiceAreas, clientTeamSize, internalCollaboration, externalCollaboration, analyticsAndReporting, toolAdministrationAndControlChange, intakeAndLeadManagement, clientPortal, documentManagement, caseAlerts, budgetExpenseAndTimeTracking, clientBillingAndInvoicing, policyManagement, issueManagement, lawsComplianceAndRegulatoryTracking, contractCreationAndAuthoring, contractRepository, contractNegotiation, lifecycleManagement, clauseLibrary, fieldsCreation, trackingAndValidity, documentManagementAndTemplates, documentCapturing, documentCreationAndTemplates, documentCapturing2, documentSearchAndNavigation, authentication, taskAllotment, budgetingExpenseAndTimeTracking, clientManagement, invoiceGenerationAndReview, dataIdentificationAndCollection, searchProcessingAndAnalysis, reviewAndProduction, legalHoldManagement, ideationAndCreation, lifecycleManagement2, searchAndDiscovery, storageAndRepository, matterLifecycleTracking, courtAndCaseSearch, budgetExpenseAndTimeTracking2, litigationDocketingFeatures, workflowDesignAndConfiguration, assignmentAllotmentAndTracking, documentCreationAndManagement, lawsComplianceAndRegulatoryTracking2, minimumContractPeriod, freeTrial, freePlan, plan1Feature1, plan1Feature2, plan1Feature3, plan2Feature1, plan2Feature2, plan2Feature3, videoLink, knowHowDocument, linkedIn, instagram, twitter, youtube, otherLink, demo, demoData, demoLink, support, supportData, training, trainingData, storage, storageChange, fileSize, fileSizeChange, requestForChange, postImplementationTraining, dataMigration, userTestimonialName1, userTestimonialDesignation1, userTestimonialCompany1, userTestimonialComment1, userTestimonialName2, userTestimonialDesignation2, userTestimonialCompany2, userTestimonialComment2
+            name, overview, uniqueSellingProposition, category, deployment, accessibility, adoptionTime, country, language, customerSegment,individualPractitionersPercentage, lawFirmsPercentage, inHouseLegalDepartmentsPercentage, enterprisesPercentage, judiciaryPercentage, governmentDepartmentsPercentage, startupsPercentage, industries, practiceAreas, clientTeamSize, internalCollaboration, externalCollaboration, analyticsAndReporting, toolAdministrationAndControlChange, intakeAndLeadManagement, clientPortal, documentManagement, caseAlerts, budgetExpenseAndTimeTracking, clientBillingAndInvoicing, policyManagement, issueManagement, lawsComplianceAndRegulatoryTracking, contractCreationAndAuthoring, contractRepository, contractNegotiation, lifecycleManagement, clauseLibrary, fieldsCreation, trackingAndValidity, documentManagementAndTemplates, documentCapturing, documentCreationAndTemplates, documentCapturing2, documentSearchAndNavigation, authentication, taskAllotment, budgetingExpenseAndTimeTracking, clientManagement, invoiceGenerationAndReview, dataIdentificationAndCollection, searchProcessingAndAnalysis, reviewAndProduction, legalHoldManagement, ideationAndCreation, lifecycleManagement2, searchAndDiscovery, storageAndRepository, matterLifecycleTracking, courtAndCaseSearch, budgetExpenseAndTimeTracking2, litigationDocketingFeatures, workflowDesignAndConfiguration, assignmentAllotmentAndTracking, documentCreationAndManagement, lawsComplianceAndRegulatoryTracking2, minimumContractPeriod, freeTrial, freePlan, plan1Feature1, plan1Feature2, plan1Feature3, plan2Feature1, plan2Feature2, plan2Feature3, videoLink, knowHowDocument1,knowHowDocument2, knowHowDocument3, linkedIn, instagram, twitter, youtube, otherLink, demo, demoData, demoLink, support, supportData, training, trainingData, storage, storageChange, fileSize, fileSizeChange, requestForChange, postImplementationTraining, dataMigration, userTestimonialName1, userTestimonialDesignation1, userTestimonialCompany1, userTestimonialComment1, userTestimonialName2, userTestimonialDesignation2, userTestimonialCompany2, userTestimonialComment2
         },
 
             {
@@ -172,8 +199,6 @@ const Products = () => {
         );
         toast.success("Product Added Successfully");
     }
-
-
 
 
 
@@ -232,10 +257,39 @@ const Products = () => {
             }
         });
     };
-    const handleCustomerSegmentChange =
-        (selectedOptions) => {
-            setCustomerSegment(selectedOptions)
-        };
+
+    const handleCustomerSegmentChange = (selectedOptions) => {
+        setCustomerSegment(selectedOptions);
+
+        selectedOptions.forEach((option) => {
+            switch (option.value) {
+                case 'Individual Practitioners':
+                    setIndividualPractitioners(selectedOptions.includes(option));
+                    break;
+                case 'Law Firms':
+                    setLawFirms(selectedOptions.includes(option));
+                    break;
+                case 'In-house Legal Departments':
+                    setInHouseLegalDepartments(selectedOptions.includes(option));
+                    break;
+                case 'Enterprises':
+                    setEnterprises(selectedOptions.includes(option));
+                    break;
+                case 'Judiciary':
+                    setJudiciary(selectedOptions.includes(option));
+                    break;
+                case 'Government Departments':
+                    setGovernmentDepartments(selectedOptions.includes(option));
+                    break;
+                case 'Startups':
+                    setStartups(selectedOptions.includes(option));
+                    break;
+                default:
+                    break;
+            }
+        });
+    };
+
 
     const handleInternalCollaborationChange =
         (selectedOptions) => {
@@ -495,11 +549,11 @@ const Products = () => {
                             <input type="text" placeholder='Enter product name' value={capitalizeFullName(name)} onChange={(e) => setName(e.target.value)} autoCapitalize='' /> </div>
 
                         <div className="inputfield">
-                            Overview ( Up to 150 words )
+                            Overview (Up to 150 words)
                             <textarea type="text" placeholder='Enter Overview' maxLength={1000} value={capitalizeFirstLetter(overview)} onChange={(e) => setOverview(e.target.value)} rows={9} cols={50} /></div>
 
                         <div className="inputfield">
-                            What is your unique selling proposition? ( Up to 200 words )
+                            What is your unique selling proposition? (Up to 200 words)
                             <textarea type="text" placeholder='Enter unique selling proposition' value={capitalizeFirstLetter(uniqueSellingProposition)} onChange={(e) => setUniqueSellingProposition(e.target.value)} maxLength={1500} rows={9} cols={50} /></div>
 
                         <div className="inputfield">
@@ -510,7 +564,7 @@ const Products = () => {
                             /> </div>
 
                         <div className="inputfield">
-                            Deploymenty
+                            Deployment
                             <Select options={deploymentOptions} placeholder={"Select Deployment "} value={deployment} onChange={handleDeploymentChange}
                                 isMulti={true}
                             /></div>
@@ -521,9 +575,9 @@ const Products = () => {
                             <div className="inputOptions">
 
                                 <input type="radio" name="Accessibility" id="accessibility" checked={accessibility === true}
-                                    onChange={() => setAccessibility(true)} /> True
+                                    onChange={() => setAccessibility(true)} /> Yes
                                 <input type="radio" name="Accessibility" id="accessibility" checked={!accessibility}
-                                    onChange={() => setAccessibility(false)} />False </div> </div>
+                                    onChange={() => setAccessibility(false)} />No </div> </div>
 
 
                         <div className="inputfield">
@@ -531,8 +585,9 @@ const Products = () => {
                             <div className="inputOptions2">
                                 <input type="number"
                                     value={adoptionTime}
-                                    onChange={(e) => setAdoptionTime(e.target.value)} />
-                                <Select placeholder={"Select storage type"}
+                                    onChange={(e) => setAdoptionTime(e.target.value)}
+                                    min={0} />
+                                <Select placeholder={"Select Period"}
                                     options={timeSelectionOptions} value={adoptionTimeSelected}
                                     onChange={(selectedOptions) => setAdoptionTimeSelected(selectedOptions)}
 
@@ -541,7 +596,7 @@ const Products = () => {
                         <div className="inputfield">
                             Focus Countries
                             <Select options={countryOptions}
-                                placeholder={"Select Countries Maximum 5 "} value={country} onChange={handleCountryChange} 
+                                placeholder={"Maximum 5 "} value={country} onChange={handleCountryChange}
                                 isMulti={true}
                             /></div>
 
@@ -564,10 +619,42 @@ const Products = () => {
                                 isMulti={true}
                             /></div>
 
-                        <div className="inputfield">
-                            Write the percentage for each of the customer segments selected to show the distribution of customer segments &nbsp;
-                            <input type="number" placeholder='Enter Percentage less than or equal to 100' value={customerSegmentPercentage} onChange={(e) => setCustomerSegmentPercentage(e.target.value)} max={100} />
-                        </div>
+                        {individualPractitioners &&
+                            <div className="inputfield">
+                                Individual Practitioners
+                                <input type="number" placeholder='' value={individualPractitionersPercentage} onChange={(e) => setIndividualPractitionersPercentage(e.target.value)} min={0} max={100} />
+                            </div>}
+                        {lawFirms &&
+                            <div className="inputfield">
+                                Law firms
+                                <input type="number" placeholder='' value={lawFirmsPercentage} onChange={(e) => setLawFirmsPercentage(e.target.value)} min={0} max={100} />
+                            </div>}
+                        {inHouseLegalDepartments &&
+                            <div className="inputfield">
+                                In-house legal departments
+                                <input type="number" placeholder='' value={inHouseLegalDepartmentsPercentage} onChange={(e) => setInHouseLegalDepartmentsPercentage(e.target.value)} min={0} max={100} />
+                            </div>}
+                        {enterprises &&
+                            <div className="inputfield">
+                                Enterprises
+                                <input type="number" placeholder='' value={enterprisesPercentage} onChange={(e) => setEnterprisesPercentage(e.target.value)} min={0} max={100} />
+                            </div>}
+                        {judiciary &&
+                            <div className="inputfield">
+                                Judiciary
+                                <input type="number" placeholder='' value={judiciaryPercentage} onChange={(e) => setJudiciaryPercentage(e.target.value)} min={0} max={100} />
+                            </div>}
+                        {governmentDepartments &&
+                            <div className="inputfield">
+                                Government Departments
+                                <input type="number" placeholder='' value={governmentDepartmentsPercentage} onChange={(e) => setGovernmentDepartmentsPercentage(e.target.value)} min={0} max={100} />
+                            </div>}
+                        {startups &&
+                            <div className="inputfield">
+                                Startups
+                                <input type="number" placeholder='' value={startupsPercentage} onChange={(e) => setStartupsPercentage(e.target.value)} min={0} max={100} />
+                            </div>}
+
 
                         <div className="inputfield">
                             Industries
@@ -577,7 +664,7 @@ const Products = () => {
 
                         <div className="inputfield">
                             What are the practice areas your product can work into?
-                            *
+
                             <Select options={practiceAreaOptions} placeholder={"Select Practice Areas "} value={practiceAreas} onChange={handlePracticeAreasChange} isMulti={true} /></div>
 
                         <div className="inputfield">
@@ -589,7 +676,7 @@ const Products = () => {
 
                     <div className="category">
                         <h1>Features</h1>
-                        <h3>Common to all</h3>
+                        {/* <h3>Common to all</h3> */}
                         <div className="inputfield">
                             Internal Collaboration <Select
                                 options={commonToAll.internalCollaboration}
@@ -1056,39 +1143,90 @@ const Products = () => {
                     <div className="category">
                         <h1>References</h1>
                         <div className="inputfield">
-                            Video Link &nbsp;
-                            <input type="text" placeholder='Enter Youtube Video Link Only one' value={capitalizeFirstLetter(videoLink)} onChange={(e) => setVideoLink(e.target.value)} /></div>
+                            Video Link 
+                            <div className="checkInput">
+                            <input type="text" placeholder='Enter Youtube Video Link ' value={(videoLink)} onChange={(e) =>{ setVideoLink(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setVideoLinkValid(isValidUrl)} }/>
+                                 {!videoLinkValid && <span>Invalid URL</span>}</div> </div>
                         {/* Images ( upto 5) */}
                         {/* <input type="text" /> */}
                         <div className="inputfield">
                             Know how
-                            documents &nbsp;
-                            <input type="text" placeholder='Enter Document Link here' value={knowHowDocument} onChange={(e) => setKnowHowDocument(e.target.value)} /></div>
+                            documents 
+                            <div className="checkInput">
+                            <input type="text" placeholder='Enter Document Link here'  value={knowHowDocument1} onChange={(e) =>{ setKnowHowDocument1(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setKnowHowDocument1Valid(isValidUrl)} }/>
+                                 {!knowHowDocument1Valid && <span>Invalid URL</span>}
+                                 </div></div>
+
+                            {knowHowDocument1 && <div className="inputfield">
+                            Document Link 
+                            <div className="checkInput">
+
+                            <input type="text" placeholder='Enter Document Link here'  value={knowHowDocument2} onChange={(e) =>{ setKnowHowDocument2(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setKnowHowDocument2Valid(isValidUrl)} }/>
+                                 {!knowHowDocument2Valid && <span>Invalid URL</span>}
+                                 </div>
+                                 </div>
+ }
+                            {knowHowDocument1 && knowHowDocument2 && <div className="inputfield">
+                            Document Link 
+                            <div className="checkInput">
+                            <input type="text" placeholder='Enter Document Link here'  value={knowHowDocument3} onChange={(e) =>{ setKnowHowDocument3(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setKnowHowDocument3Valid(isValidUrl)} }/>
+                                 {!knowHowDocument3Valid && <span>Invalid URL</span>}
+                                 </div></div>
+ }
 
                         <div className="inputfield">
-                            Linkedin &nbsp;
-                            <input type="text" placeholder="Linkedin Link here" value={linkedIn} onChange={(e) => setLinkedIn(e.target.value)} /> </div>
+                            Linkedin 
+                            <div className="checkInput">
+                            <input type="text" placeholder="Linkedin Link here" value={linkedIn} onChange={(e) =>{ setLinkedIn(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setLinkedInValid(isValidUrl)} }/>
+                                 {!linkedInValid && <span>Invalid URL</span>} </div>
+                             </div>
                         <div className="inputfield">
-                            Instagram &nbsp;
-                            <input type="text" placeholder="Instagram Link here" value={instagram} onChange={(e) => setInstagram(e.target.value)} /></div>
+                            Instagram 
+                            <div className="checkInput">
+                            <input type="text" placeholder="Instagram Link here" value={instagram} onChange={(e) =>{ setInstagram(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setInstagramValid(isValidUrl)} }/>
+                                 {!instagramValid && <span>Invalid URL</span>}</div></div>
                         <div className="inputfield">
-                            X(Twitter) &nbsp;
-                            <input type="text" placeholder="X(Twitter)" value={twitter} onChange={(e) => setTwitter(e.target.value)} /></div>
+                            X(Twitter) 
+                            <div className="checkInput">
+                            <input type="text" placeholder="X(Twitter)" value={twitter} onChange={(e) =>{ setTwitter(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setTwitterValid(isValidUrl)} }/>
+                                 {!twitterValid && <span>Invalid URL</span>}</div></div>
 
                         <div className="inputfield">
-                            Youtube &nbsp;
-                            <input type="text" placeholder="Youtube" value={youtube} onChange={(e) => setYoutube(e.target.value)} /></div>
+                            Youtube 
+                            <div className="checkInput">
+                            <input type="text" placeholder="Youtube" value={youtube} onChange={(e) =>{ setYoutube(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setYoutubeValid(isValidUrl)} }/>
+                                 {!youtubeValid && <span>Invalid URL</span>}</div></div>
 
                         <div className="inputfield">
-                            Any Other Link &nbsp;
-                            <input type="text" placeholder="Youtube" value={otherLink} onChange={(e) => setOtherLink(e.target.value)} /></div>
+                            Any Other Link 
+                            <div className="checkInput">
+                            <input type="text" placeholder="Youtube" value={otherLink} onChange={(e) =>{ setOtherLink(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setOtherLinkValid(isValidUrl)} }/>
+                                 {!otherLinkValid && <span>Invalid URL</span>}</div></div>
                     </div>
 
                     <div className="category">
                         <h1>Services and Support</h1>
                         <div className="inputfield">
                             Demo
-                            If yes, then choose out of <Select
+                            <Select
                                 options={demoOptions}
                                 value={demoData}
                                 onChange={handleDemoDataChange}
@@ -1096,11 +1234,16 @@ const Products = () => {
                                 isMulti={true}
                             /></div>
                         <div className="inputfield">
-                            Add demo link (if any)  <input type="text" placeholder='Enter product name' value={demoLink} onChange={(e) => setDemoLink(e.target.value)} /></div>
+
+                            Add demo link (if any) 
+                            <div className="checkInput"> <input type="text" placeholder='Enter product name' value={demoLink} onChange={(e) =>{ setDemoLink(e.target.value);
+                                 const isValidUrl =  isURL(e.target.value);
+                                 setDemoLinkValid(isValidUrl)} }/>
+                                 {!demoLinkValid && <span>Invalid URL</span>}</div></div>
                         {/* <input type="text" placeholder='Enter Practice Areas' value={demoNote} onChange={(e) => setDemoNote(e.target.value)} /> */}
                         <div className="inputfield">
                             Support
-                            If yes, then choose from these:<Select
+                            <Select
                                 options={supportOptions}
                                 value={supportData}
                                 onChange={handleSupportDataChange}
@@ -1110,7 +1253,7 @@ const Products = () => {
 
                         <div className="inputfield">
                             Training
-                            If yes, then choose from these:<Select
+                            <Select
                                 options={trainingOptions}
                                 value={trainingData}
                                 placeholder={"Select Training Options "}
@@ -1119,17 +1262,17 @@ const Products = () => {
                             /></div>
                         <div className="inputfield">
                             Storage
-                            (Enter the storage capacity in GB) &nbsp;
+                            &nbsp;
                             <div className="inputOptions2">
                                 <input type="number" placeholder='' value={storage} onChange={(e) => setStorage(e.target.value)} max={1048} />
-                                <Select options={memoryOptions} value={storageChange} onChange={(selectedOptions) => setStorageChange(selectedOptions)} placeholder={"Select Memory type"} /></div></div>
+                                <Select options={memoryOptions} value={storageChange} onChange={(selectedOptions) => setStorageChange(selectedOptions)} placeholder={"Memory type"} /></div></div>
 
 
                         <div className="inputfield">
                             File size limit (if any) &nbsp;
                             <div className="inputOptions2">
                                 <input type="number" placeholder='' value={fileSize} onChange={(e) => setFileSize(e.target.value)} />
-                                <Select options={memoryOptions} value={fileSizeChange} onChange={(selectedOptions) => setFileSizeChange(selectedOptions)} placeholder={"Select Memory type"} /></div></div>
+                                <Select options={memoryOptions} value={fileSizeChange} onChange={(selectedOptions) => setFileSizeChange(selectedOptions)} placeholder={"Memory type"} /></div></div>
                     </div>
                     <div className="category">
                         <h1>Post Implementation services</h1>
@@ -1157,7 +1300,7 @@ const Products = () => {
                         <div>
                         </div>
 
-                        <h1>User Testimonial 1 </h1>
+                        <h1>User Testimonial  </h1>
                         <div className="inputfield">
                             Name &nbsp;
                             <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialName1)} onChange={(e) => setUserTestimonialName1(e.target.value)} /></div>
@@ -1175,7 +1318,7 @@ const Products = () => {
                             Click To Add Another Testimonial <button
                                 value={isSecondTestimonial} onClick={handleSecondTestimonial}>Click Here</button> </div>
                         {isSecondTestimonial && userTestimonialName1 && userTestimonialDesignation1 && userTestimonialCompany1 && userTestimonialComment1 && <div>
-                            <h1>User Testimonial 2</h1>
+                            <h1>User Testimonial </h1>
                             <div className="inputfield">
                                 Name
                                 <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialName2)} onChange={(e) => setUserTestimonialName2(e.target.value)

@@ -1,4 +1,3 @@
-.products {}
 
 .addProducts {
 
@@ -18,6 +17,16 @@
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 15px;
             align-items: start;
+           
+            >.checkInput{
+                display: flex;
+                flex-direction: column;
+                >span{
+                    align-self: flex-end;
+                    color: red;
+                    font-size: 12px;
+                }
+            }
 
             >.inputOptions {
                 display: grid;
@@ -40,6 +49,7 @@
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 10px;
             align-items: start;
+            margin-top: 10px;
         }
     }
 }
