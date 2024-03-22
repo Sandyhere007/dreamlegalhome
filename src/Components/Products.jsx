@@ -1216,7 +1216,7 @@ const Products = () => {
                         <div className="inputfield">
                             Any Other Link 
                             <div className="checkInput">
-                            <input type="text" placeholder="Youtube" value={otherLink} onChange={(e) =>{ setOtherLink(e.target.value);
+                            <input type="text" placeholder="If any" value={otherLink} onChange={(e) =>{ setOtherLink(e.target.value);
                                  const isValidUrl =  isURL(e.target.value);
                                  setOtherLinkValid(isValidUrl)} }/>
                                  {!otherLinkValid && <span>Invalid URL</span>}</div></div>
@@ -1236,7 +1236,7 @@ const Products = () => {
                         <div className="inputfield">
 
                             Add demo link (if any) 
-                            <div className="checkInput"> <input type="text" placeholder='Enter product name' value={demoLink} onChange={(e) =>{ setDemoLink(e.target.value);
+                            <div className="checkInput"> <input type="text" placeholder='Enter Link if any' value={demoLink} onChange={(e) =>{ setDemoLink(e.target.value);
                                  const isValidUrl =  isURL(e.target.value);
                                  setDemoLinkValid(isValidUrl)} }/>
                                  {!demoLinkValid && <span>Invalid URL</span>}</div></div>
@@ -1303,15 +1303,15 @@ const Products = () => {
                         <h1>User Testimonial  </h1>
                         <div className="inputfield">
                             Name &nbsp;
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialName1)} onChange={(e) => setUserTestimonialName1(e.target.value)} /></div>
+                            <input type="text" placeholder='Enter Name' value={capitalizeFirstLetter(userTestimonialName1)} onChange={(e) => setUserTestimonialName1(e.target.value)} /></div>
                         {userTestimonialName1 && <div> <div className="inputfield">  Designation &nbsp;
-                            <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialDesignation1)} onChange={(e) => setUserTestimonialDesignation1(e.target.value)} /></div>
+                            <input type="text" placeholder='Enter Designation' value={capitalizeFirstLetter(userTestimonialDesignation1)} onChange={(e) => setUserTestimonialDesignation1(e.target.value)} /></div>
                             <div className="inputfield">
                                 Company/Organization &nbsp;
-                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialCompany1)} onChange={(e) => setUserTestimonialCompany1(e.target.value)} /></div>
+                                <input type="text" placeholder='Enter Company' value={capitalizeFirstLetter(userTestimonialCompany1)} onChange={(e) => setUserTestimonialCompany1(e.target.value)} /></div>
                             <div className="inputfield">
                                 Comment &nbsp;
-                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialComment1)} onChange={(e) => setUserTestimonialComment1(e.target.value)} /></div> </div>}
+                                <input type="text" placeholder='Enter Comment' value={capitalizeFirstLetter(userTestimonialComment1)} onChange={(e) => setUserTestimonialComment1(e.target.value)} /></div> </div>}
 
                         <div>
 
@@ -1321,20 +1321,20 @@ const Products = () => {
                             <h1>User Testimonial </h1>
                             <div className="inputfield">
                                 Name
-                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialName2)} onChange={(e) => setUserTestimonialName2(e.target.value)
+                                <input type="text" placeholder='Enter Name' value={capitalizeFirstLetter(userTestimonialName2)} onChange={(e) => setUserTestimonialName2(e.target.value)
 
                                 } /></div></div>}
 
                         {isSecondTestimonial && userTestimonialName1 && userTestimonialDesignation1 && userTestimonialCompany1 && userTestimonialComment1 && userTestimonialName2 && <div>
                             <div className="inputfield">
                                 Designation &nbsp;
-                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialDesignation2)} onChange={(e) => setUserTestimonialDesignation2(e.target.value)} /></div>
+                                <input type="text" placeholder='Enter Designation' value={capitalizeFirstLetter(userTestimonialDesignation2)} onChange={(e) => setUserTestimonialDesignation2(e.target.value)} /></div>
                             <div className="inputfield">
                                 Company/Organization &nbsp;
-                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialCompany2)} onChange={(e) => setUserTestimonialCompany2(e.target.value)} /> </div>
+                                <input type="text" placeholder='Enter Company' value={capitalizeFirstLetter(userTestimonialCompany2)} onChange={(e) => setUserTestimonialCompany2(e.target.value)} /> </div>
                             <div className="inputfield">
                                 Comment &nbsp;
-                                <input type="text" placeholder='Enter product name' value={capitalizeFirstLetter(userTestimonialComment2)} onChange={(e) => setUserTestimonialComment2(e.target.value)} /></div> </div>}
+                                <input type="text" placeholder='Enter Comment' value={capitalizeFirstLetter(userTestimonialComment2)} onChange={(e) => setUserTestimonialComment2(e.target.value)} /></div> </div>}
 
                     </div>
 
